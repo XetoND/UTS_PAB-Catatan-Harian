@@ -28,6 +28,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".AddNoteActivity066"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 

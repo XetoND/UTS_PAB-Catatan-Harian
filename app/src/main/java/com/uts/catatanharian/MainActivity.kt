@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
  * 3. Menampilkan daftar catatan user dengan RecyclerView dan isolasi data
  * 4. Fitur pencarian catatan secara real-time (Search Bar)
  * 5. Logika logout dengan dialog konfirmasi dan pembersihan sesi di SharedPreferences
+ * 6. Membuka form tambah catatan (Bagian #5)
  */
 class MainActivity : AppCompatActivity() {
 
@@ -69,9 +70,10 @@ class MainActivity : AppCompatActivity() {
             showLogoutConfirmation066()
         }
 
-        // 6. Tombol Tambah Catatan (Placeholder Bagian 5)
+        // 6. Tombol Tambah Catatan (Membuka AddNoteActivity066)
         binding066.fabAddNote066.setOnClickListener {
-            Toast.makeText(this, "Akan membuka form tambah catatan (Bagian 5)", Toast.LENGTH_SHORT).show()
+            val intent066 = Intent(this, AddNoteActivity066::class.java)
+            startActivity(intent066)
         }
     }
 
