@@ -13,13 +13,13 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 /**
- * Instrumented test untuk memvalidasi operasi CRUD dan Isolasi Data pada NoteDao066.
+ * Instrumented test untuk memvalidasi operasi CRUD dan Isolasi Data pada NoteDao066 (NIM 066).
  */
 @RunWith(AndroidJUnit4::class)
 class NoteDao066Test {
 
     private lateinit var db: AppDatabase
-    private lateinit var userDao: UserDao064
+    private lateinit var userDao: UserDao066
     private lateinit var noteDao: NoteDao066
 
     private var userId1: Int = 0
@@ -30,12 +30,12 @@ class NoteDao066Test {
         val context = ApplicationProvider.getApplicationContext<Context>()
         // Gunakan in-memory database agar data uji langsung terhapus setelah pengujian selesai
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        userDao = db.userDao064()
+        userDao = db.userDao066()
         noteDao = db.noteDao066()
 
         // Siapkan 2 user berbeda untuk pengujian isolasi data
-        userId1 = userDao.insertUser064(User064(username = "user_satu_066", password = "password123")).toInt()
-        userId2 = userDao.insertUser064(User064(username = "user_dua_066", password = "password456")).toInt()
+        userId1 = userDao.insertUser066(User066(username = "user_satu_066", password = "password123")).toInt()
+        userId2 = userDao.insertUser066(User066(username = "user_dua_066", password = "password456")).toInt()
     }
 
     @After

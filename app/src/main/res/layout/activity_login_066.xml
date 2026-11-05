@@ -15,69 +15,59 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Buat Akun"
+            android:text="Catatan Harian"
             android:textSize="28sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Silakan login untuk melanjutkan" />
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_username_064"
+            android:id="@+id/til_username_066"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_username_064"
+                android:id="@+id/et_username_066"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_password_064"
+            android:id="@+id/til_password_066"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Password (min. 6 karakter)"
+            android:hint="Password"
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_password_064"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_confirm_064"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Konfirmasi password"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_confirm_064"
+                android:id="@+id/et_password_066"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_register_064"
+            android:id="@+id/btn_login_066"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Daftar" />
+            android:text="Login" />
 
         <TextView
-            android:id="@+id/tv_to_login_064"
+            android:id="@+id/tv_to_register_066"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:padding="8dp"
-            android:text="Sudah punya akun? Login"
+            android:text="Belum punya akun? Daftar"
             android:textColor="?attr/colorPrimary" />
     </LinearLayout>
 </ScrollView>

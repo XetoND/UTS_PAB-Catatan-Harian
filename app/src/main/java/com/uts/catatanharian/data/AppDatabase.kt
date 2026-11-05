@@ -5,11 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-// Database Room untuk aplikasi Catatan Harian.
-// Menggabungkan User064 (Bagian #1) dan Note066 (Bagian #2).
-@Database(entities = [User064::class, Note066::class], version = 2, exportSchema = false)
+// Database Room untuk aplikasi Catatan Harian (NIM 066).
+@Database(entities = [User066::class, Note066::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao064(): UserDao064
+    abstract fun userDao066(): UserDao066
     abstract fun noteDao066(): NoteDao066
 
     companion object {
