@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-// NOTE: placeholder minimal. Orang Room menambahkan entity Note ke daftar entities
-// dan menaikkan version. Entity User064 + userDao064() harus tetap ada.
-@Database(entities = [User064::class], version = 1, exportSchema = false)
+// Database Room untuk aplikasi Catatan Harian.
+// Menggabungkan User064 (Bagian #1) dan Note066 (Bagian #2).
+@Database(entities = [User064::class, Note066::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao064(): UserDao064
+    abstract fun noteDao066(): NoteDao066
 
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null
@@ -18,7 +19,10 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext, AppDatabase::class.java, "catatan_harian.db"
-                ).build().also { INSTANCE = it }
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+                    .also { INSTANCE = it }
             }
     }
 }
