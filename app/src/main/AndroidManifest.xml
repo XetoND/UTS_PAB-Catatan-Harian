@@ -32,6 +32,10 @@
             android:name=".AddNoteActivity066"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".EditNoteActivity066"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 

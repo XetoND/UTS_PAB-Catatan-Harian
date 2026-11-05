@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_edit_note_066"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    tools:context=".EditNoteActivity066">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top Header Navigation -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back_edit_066"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="Kembali"
+                app:icon="@drawable/ic_arrow_back_066" />
+
+            <TextView
+                android:id="@+id/tv_edit_title_header_066"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="Edit Catatan"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_top_delete_066"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="Hapus Catatan"
+                app:icon="@drawable/ic_delete_066"
+                app:iconTint="?attr/colorError" />
+        </LinearLayout>
+
+        <!-- Date Info Badge -->
+        <TextView
+            android:id="@+id/tv_edit_date_info_066"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="?attr/colorOutline"
+            android:textSize="13sp"
+            tools:text="Dibuat pada: 05 Nov 2026, 20:30" />
+
+        <!-- Input Judul -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_edit_judul_066"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Judul Catatan"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="100">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_edit_judul_066"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:maxLines="2" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Input Isi -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_edit_isi_066"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Isi Catatan Harian"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_edit_isi_066"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="10" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Action Buttons -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update_note_066"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:padding="12dp"
+            android:text="Perbarui Catatan"
+            android:textSize="15sp"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_save_066"
+            app:iconGravity="textStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_delete_note_066"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="12dp"
+            android:text="Hapus Catatan"
+            android:textColor="?attr/colorError"
+            android:textSize="15sp"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_delete_066"
+            app:iconGravity="textStart"
+            app:iconTint="?attr/colorError"
+            app:strokeColor="?attr/colorError" />
+
+    </LinearLayout>
+
+</ScrollView>

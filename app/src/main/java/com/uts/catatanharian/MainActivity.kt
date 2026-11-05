@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
  * 4. Fitur pencarian catatan secara real-time (Search Bar)
  * 5. Logika logout dengan dialog konfirmasi dan pembersihan sesi di SharedPreferences
  * 6. Membuka form tambah catatan (Bagian #5)
+ * 7. Membuka form edit dan hapus catatan saat item diklik (Bagian #6)
  */
 class MainActivity : AppCompatActivity() {
 
@@ -145,8 +146,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onNoteItemClicked066(note066: Note066) {
-        // Placeholder untuk Bagian 6 (Layar Detail / Edit / Hapus)
-        Toast.makeText(this, "Catatan dipilih: ${note066.judul}", Toast.LENGTH_SHORT).show()
+        // Membuka form Edit dan Hapus Catatan (Bagian #6)
+        val intent066 = Intent(this, EditNoteActivity066::class.java).apply {
+            putExtra(EditNoteActivity066.EXTRA_NOTE_ID_066, note066.id)
+        }
+        startActivity(intent066)
     }
 
     private fun showLogoutConfirmation066() {
