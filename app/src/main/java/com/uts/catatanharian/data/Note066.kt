@@ -6,12 +6,12 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-// Entity catatan untuk Bagian #2 Data Layer (NIM 066).
-// Berelasi ke User064 dengan foreign key onDelete CASCADE dan index user_id_066.
+// Entity catatan (NIM 066).
+// Berelasi ke User066 dengan foreign key onDelete CASCADE dan index user_id_066.
 @Entity(
     tableName = "notes_066",
     foreignKeys = [ForeignKey(
-        entity = User064::class,
+        entity = User066::class,
         parentColumns = ["id"],
         childColumns = ["user_id_066"],
         onDelete = ForeignKey.CASCADE

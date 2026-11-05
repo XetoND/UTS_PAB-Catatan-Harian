@@ -5,41 +5,41 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.uts.catatanharian.data.AppDatabase
-import com.uts.catatanharian.data.User064
-import com.uts.catatanharian.databinding.ActivityRegister064Binding
+import com.uts.catatanharian.data.User066
+import com.uts.catatanharian.databinding.ActivityRegister066Binding
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var binding064: ActivityRegister064Binding
+    private lateinit var binding066: ActivityRegister066Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding064 = ActivityRegister064Binding.inflate(layoutInflater)
-        setContentView(binding064.root)
+        binding066 = ActivityRegister066Binding.inflate(layoutInflater)
+        setContentView(binding066.root)
 
-        binding064.btnRegister064.setOnClickListener { doRegister064() }
-        binding064.tvToLogin064.setOnClickListener { finish() }
+        binding066.btnRegister066.setOnClickListener { doRegister066() }
+        binding066.tvToLogin066.setOnClickListener { finish() }
     }
 
-    private fun doRegister064() {
-        val username064 = binding064.etUsername064.text.toString().trim()
-        val password064 = binding064.etPassword064.text.toString()
-        val confirm064 = binding064.etConfirm064.text.toString()
+    private fun doRegister066() {
+        val username066 = binding066.etUsername066.text.toString().trim()
+        val password066 = binding066.etPassword066.text.toString()
+        val confirm066 = binding066.etConfirm066.text.toString()
 
-        binding064.tilUsername064.error = AuthValidator064.validateUsername064(username064)
-        binding064.tilPassword064.error = AuthValidator064.validatePassword064(password064)
-        binding064.tilConfirm064.error = AuthValidator064.validateConfirm064(password064, confirm064)
-        if (binding064.tilUsername064.error != null ||
-            binding064.tilPassword064.error != null ||
-            binding064.tilConfirm064.error != null) return
+        binding066.tilUsername066.error = AuthValidator066.validateUsername066(username066)
+        binding066.tilPassword066.error = AuthValidator066.validatePassword066(password066)
+        binding066.tilConfirm066.error = AuthValidator066.validateConfirm066(password066, confirm066)
+        if (binding066.tilUsername066.error != null ||
+            binding066.tilPassword066.error != null ||
+            binding066.tilConfirm066.error != null) return
 
         lifecycleScope.launch {
-            val dao = AppDatabase.getInstance(this@RegisterActivity).userDao064()
-            if (dao.getByUsername064(username064) != null) {
-                binding064.tilUsername064.error = "Username sudah dipakai"
+            val dao066 = AppDatabase.getInstance(this@RegisterActivity).userDao066()
+            if (dao066.getByUsername066(username066) != null) {
+                binding066.tilUsername066.error = "Username sudah dipakai"
                 return@launch
             }
-            dao.insertUser064(User064(username = username064, password = AuthValidator064.hash064(password064)))
+            dao066.insertUser066(User066(username = username066, password = AuthValidator066.hash066(password066)))
             Toast.makeText(this@RegisterActivity, "Registrasi berhasil, silakan login", Toast.LENGTH_SHORT).show()
             finish()
         }
