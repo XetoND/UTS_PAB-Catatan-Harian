@@ -1,6 +1,6 @@
 # Catatan Harian
 
-Aplikasi Android untuk mencatat catatan harian, dengan login per pengguna dan data yang privat. Dibuat untuk tugas UTS mata kuliah **Pengembangan Aplikasi Bergerak** (Telkom University, Semester 7), Kelompok 1.
+Aplikasi Android untuk mencatat catatan harian, dengan login per pengguna dan data yang privat. Dibuat untuk tugas UTS mata kuliah **Pengembangan Aplikasi Bergerak** (Telkom University, Semester 7).
 
 Aplikasi berjalan sepenuhnya offline. Data disimpan di SQLite lewat Room, tanpa internet dan tanpa API.
 
@@ -8,23 +8,20 @@ Aplikasi berjalan sepenuhnya offline. Data disimpan di SQLite lewat Room, tanpa 
 
 - Register dan login dengan password yang di-hash (SHA-256)
 - Sesi login disimpan di SharedPreferences
+- Dashboard interaktif dengan sapaan nama user dan fitur Logout
 - Catatan bersifat privat: setiap query ke database difilter dengan `user_id`, sehingga satu pengguna tidak bisa membaca, mengubah, atau menghapus catatan pengguna lain
 - CRUD catatan di lapisan data, termasuk pencarian berdasarkan judul dan isi
 
 ## Status pengerjaan
 
-Proyek dikerjakan berkelompok, satu bagian per orang.
-
 | # | Bagian | Cakupan | Status |
 |---|---|---|---|
 | 1 | Auth | Register, login, validasi, hash password | Selesai |
 | 2 | Data layer | Entity `Note`, `NoteDao`, `AppDatabase`, test | Selesai |
-| 3 | Dashboard dan Logout | Layar utama, sapaan, logout, cek sesi | Belum |
+| 3 | Dashboard dan Logout | Layar utama, sapaan, logout, cek sesi | Selesai |
 | 4 | List catatan | RecyclerView, adapter, tampilan kosong, search bar | Belum |
 | 5 | Form tambah | Layar tambah, validasi input, simpan | Belum |
 | 6 | Edit dan Hapus | Layar edit, hapus dengan konfirmasi | Belum |
-
-`MainActivity` saat ini masih layar bawaan template. Setelah login berhasil, pengguna diarahkan ke layar ini, jadi alur Dashboard, List, Form, dan Edit/Hapus belum bisa dicoba dari UI.
 
 ## Teknologi
 
@@ -45,15 +42,15 @@ ViewBinding aktif.
 
 ```
 app/src/main/java/com/uts/catatanharian/
-├── MainActivity.kt              # Layar setelah login (masih template)
+├── MainActivity.kt              # Layar Dashboard & Logout (NIM 066)
 ├── auth/
 │   ├── LoginActivity.kt         # Launcher; langsung ke MainActivity bila sesi aktif
 │   ├── RegisterActivity.kt
-│   └── AuthValidator064.kt      # Validasi input dan hash password
+│   └── AuthValidator066.kt      # Validasi input dan hash password (NIM 066)
 ├── data/
-│   ├── AppDatabase.kt           # Room database, versi 2
-│   ├── User064.kt               # Tabel users_064
-│   ├── UserDao064.kt
+│   ├── AppDatabase.kt           # Room database, versi 3
+│   ├── User066.kt               # Tabel users_066
+│   ├── UserDao066.kt
 │   ├── Note066.kt               # Tabel notes_066
 │   └── NoteDao066.kt
 └── util/
@@ -62,29 +59,30 @@ app/src/main/java/com/uts/catatanharian/
 
 ### Konvensi penamaan
 
-Sesuai ketentuan soal, nama class, tabel, kolom, dan fungsi hasil modifikasi diakhiri **3 digit NIM** pemilik bagiannya. Karena tugas dibagi, tiap bagian memakai NIM-nya sendiri:
+Sesuai ketentuan soal, seluruh nama class, tabel, kolom, dan fungsi hasil modifikasi diakhiri **3 digit NIM (`066`)**:
 
-- `064`: bagian Auth (`User064`, `UserDao064`, `AuthValidator064`, tabel `users_064`)
-- `066`: bagian Data layer (`Note066`, `NoteDao066`, tabel `notes_066`)
+- Bagian Auth: `User066`, `UserDao066`, `AuthValidator066`, tabel `users_066`
+- Bagian Data layer: `Note066`, `NoteDao066`, tabel `notes_066`
+- Bagian Dashboard: `MainActivity` (komponen layout dan method `*066`)
 
 ## Skema database
 
-Nama database: `catatan_harian.db`, versi 2.
+Nama database: `catatan_harian.db`, versi 3.
 
-**`users_064`**
+**`users_066`**
 
 | Kolom | Tipe | Keterangan |
 |---|---|---|
 | `id` | Int | Primary key, auto increment |
-| `username_064` | String | Unique index |
-| `password_064` | String | Hash SHA-256 |
+| `username_066` | String | Unique index |
+| `password_066` | String | Hash SHA-256 |
 
 **`notes_066`**
 
 | Kolom | Tipe | Keterangan |
 |---|---|---|
 | `id` | Int | Primary key, auto increment |
-| `user_id_066` | Int | Foreign key ke `users_064.id`, `ON DELETE CASCADE`, diberi index |
+| `user_id_066` | Int | Foreign key ke `users_066.id`, `ON DELETE CASCADE`, diberi index |
 | `judul_066` | String | |
 | `isi_066` | String | |
 | `tanggal_066` | Long | Epoch millis; format ke teks dilakukan di UI |
@@ -144,14 +142,6 @@ Menjalankan dari command line:
 ```bash
 ./gradlew connectedDebugAndroidTest
 ```
-
-Belum ada test untuk `ON DELETE CASCADE` (hapus user ikut menghapus catatannya).
-
-## Alur Git
-
-- Satu branch per orang, misalnya `feature/register-login` dan `feature/data-layer`
-- Digabung ke `master` lewat pull request
-- `AppDatabase.kt` hanya diubah oleh pemilik bagian Data layer, untuk menghindari konflik merge. Perubahan dari bagian lain diminta lewat dia.
 
 ## Ketentuan tugas
 
