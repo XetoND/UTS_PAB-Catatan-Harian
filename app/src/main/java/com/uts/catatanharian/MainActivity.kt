@@ -2,27 +2,39 @@ package com.uts.catatanharian
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.uts.catatanharian.adapter.NoteAdapter066
 import com.uts.catatanharian.auth.LoginActivity
+import com.uts.catatanharian.data.AppDatabase
+import com.uts.catatanharian.data.Note066
 import com.uts.catatanharian.databinding.ActivityMainBinding
 import com.uts.catatanharian.util.SessionManager
+import kotlinx.coroutines.launch
 
 /**
- * Layar Dashboard Utama dan Logout (NIM 066).
+ * Layar Dashboard Utama, List Catatan, dan Logout (NIM 066).
  * Bertanggung jawab atas:
  * 1. Pengecekan sesi aktif (redirect ke login jika belum login)
  * 2. Menampilkan sapaan nama user yang sedang login
- * 3. Logika logout dengan dialog konfirmasi dan pembersihan sesi di SharedPreferences
+ * 3. Menampilkan daftar catatan user dengan RecyclerView dan isolasi data
+ * 4. Fitur pencarian catatan secara real-time (Search Bar)
+ * 5. Logika logout dengan dialog konfirmasi dan pembersihan sesi di SharedPreferences
  */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding066: ActivityMainBinding
     private lateinit var session066: SessionManager
+    private lateinit var noteAdapter066: NoteAdapter066
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,15 +60,91 @@ class MainActivity : AppCompatActivity() {
         // 3. Tampilkan sapaan pengguna aktif
         setupUserGreeting066()
 
-        // 4. Pasang aksi tombol logout
+        // 4. Setup RecyclerView & Search Bar
+        setupRecyclerView066()
+        setupSearchBar066()
+
+        // 5. Pasang aksi tombol logout
         binding066.btnLogout066.setOnClickListener {
             showLogoutConfirmation066()
+        }
+
+        // 6. Tombol Tambah Catatan (Placeholder Bagian 5)
+        binding066.fabAddNote066.setOnClickListener {
+            Toast.makeText(this, "Akan membuka form tambah catatan (Bagian 5)", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (session066.isLoggedIn()) {
+            val currentKeyword066 = binding066.etSearch066.text?.toString()?.trim() ?: ""
+            loadNotes066(currentKeyword066)
         }
     }
 
     private fun setupUserGreeting066() {
         val username066 = session066.getUsername066()
         binding066.tvUsername066.text = if (username066.isNotBlank()) username066 else "Pengguna"
+    }
+
+    private fun setupRecyclerView066() {
+        noteAdapter066 = NoteAdapter066 { clickedNote066 ->
+            onNoteItemClicked066(clickedNote066)
+        }
+
+        binding066.rvNotes066.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = noteAdapter066
+        }
+    }
+
+    private fun setupSearchBar066() {
+        binding066.etSearch066.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val keyword066 = s?.toString()?.trim() ?: ""
+                loadNotes066(keyword066)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun loadNotes066(keyword066: String) {
+        val currentUserId066 = session066.getUserId()
+        if (currentUserId066 == -1) return
+
+        lifecycleScope.launch {
+            val dao066 = AppDatabase.getInstance(this@MainActivity).noteDao066()
+            val list066 = if (keyword066.isBlank()) {
+                dao066.getAllByUser066(currentUserId066)
+            } else {
+                dao066.searchByUser066(currentUserId066, keyword066)
+            }
+
+            noteAdapter066.submitList066(list066)
+
+            if (list066.isEmpty()) {
+                binding066.rvNotes066.visibility = View.GONE
+                binding066.layoutEmptyState066.visibility = View.VISIBLE
+
+                if (keyword066.isNotBlank()) {
+                    binding066.tvEmptyTitle066.text = "Catatan Tidak Ditemukan"
+                    binding066.tvEmptyDesc066.text = "Tidak ada catatan dengan kata kunci \"$keyword066\""
+                } else {
+                    binding066.tvEmptyTitle066.text = "Belum Ada Catatan"
+                    binding066.tvEmptyDesc066.text = "Mulai buat catatan harian baru dengan menekan tombol (+) di bawah."
+                }
+            } else {
+                binding066.rvNotes066.visibility = View.VISIBLE
+                binding066.layoutEmptyState066.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun onNoteItemClicked066(note066: Note066) {
+        // Placeholder untuk Bagian 6 (Layar Detail / Edit / Hapus)
+        Toast.makeText(this, "Catatan dipilih: ${note066.judul}", Toast.LENGTH_SHORT).show()
     }
 
     private fun showLogoutConfirmation066() {
